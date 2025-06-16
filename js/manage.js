@@ -91,17 +91,17 @@ async function loadItemsWithOrder(type) {
 
         // Clear and populate grid
         const grid = type === 'projects' ? projectsGrid : blogsGrid;
-        const saveOrderBtn = type === 'projects' ? saveOrderBtn : saveBlogOrderBtn;
+        const saveButton = type === 'projects' ? document.getElementById('save-order-btn') : document.getElementById('save-blog-order-btn');
         grid.innerHTML = '';
 
         if (items.length === 0) {
             grid.innerHTML = `<div class="no-items">No ${type} found. Add some ${type} to get started.</div>`;
-            saveOrderBtn.classList.remove('visible');
+            if (saveButton) saveButton.classList.remove('visible');
             return;
         }
 
         // Show save order button when there are items
-        saveOrderBtn.classList.add('visible');
+        if (saveButton) saveButton.classList.add('visible');
 
         // Sort items according to order
         const sortedItems = orderedIds.length > 0
@@ -124,9 +124,9 @@ async function loadItemsWithOrder(type) {
     } catch (error) {
         console.error(`Error loading ${type}:`, error);
         const grid = type === 'projects' ? projectsGrid : blogsGrid;
-        const saveOrderBtn = type === 'projects' ? saveOrderBtn : saveBlogOrderBtn;
+        const saveButton = type === 'projects' ? document.getElementById('save-order-btn') : document.getElementById('save-blog-order-btn');
         grid.innerHTML = `<div class="error-message">Error loading ${type}. Please try again later.</div>`;
-        saveOrderBtn.classList.remove('visible');
+        if (saveButton) saveButton.classList.remove('visible');
     }
 }
 

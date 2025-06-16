@@ -158,16 +158,27 @@ function setupImagePreview(inputId, previewId) {
 setupImagePreview('project-image', 'project-image-preview');
 setupImagePreview('blog-image', 'blog-image-preview');
 
-// Upload image to Firebase Storage
-async function uploadImage(file, path) {
-    try {
-        const storageRef = ref(storage, path);
-        const snapshot = await uploadBytes(storageRef, file);
-        const downloadURL = await getDownloadURL(snapshot.ref);
-        return downloadURL;
-    } catch (error) {
-        console.error('Error uploading image:', error);
-        throw error;
+// Upload image to Firebase Storage with retry logic
+async function uploadImage(file, path, maxRetries = 3) {
+    let retryCount = 0;
+    
+    while (retryCount < maxRetries) {
+        try {
+            const storageRef = ref(storage, path);
+            const snapshot = await uploadBytes(storageRef, file);
+            const downloadURL = await getDownloadURL(snapshot.ref);
+            return downloadURL;
+        } catch (error) {
+            retryCount++;
+            console.error(`Upload attempt ${retryCount} failed:`, error);
+            
+            if (retryCount === maxRetries) {
+                throw new Error('Failed to upload image after multiple attempts. Please check your internet connection and try again.');
+            }
+            
+            // Wait for 2 seconds before retrying
+            await new Promise(resolve => setTimeout(resolve, 2000));
+        }
     }
 }
 
