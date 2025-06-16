@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Manager</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="nav-bar">
+        <div class="nav-content">
+            <h1>Portfolio Manager</h1>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">Add New</a>
+                <a href="manage.html" class="nav-link">Manage</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="kavin_all_wrap">
+        <div class="kavin_mainpart">
+            <div class="mainpart_inner">
+                <!-- Login Section -->
+                <section id="login" class="kavin_section">
+                    <div class="container">
+                        <h2>Login</h2>
+                        <form id="login-form" class="form">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" id="password" required>
+                            </div>
+                            <button type="submit" class="btn">Login</button>
+                        </form>
+                        <div id="auth-status" class="auth-status"></div>
+                    </div>
+                </section>
+
+                <!-- Projects Section (Hidden until authenticated) -->
+                <section id="projects" class="kavin_section" style="display: none;">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2>Add New Project</h2>
+                            <button id="logout-btn" class="btn btn-secondary">Logout</button>
+                        </div>
+                        <form id="project-form" class="form">
+                            <div class="form-group">
+                                <label for="project-title">Project Title</label>
+                                <input type="text" id="project-title" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="project-category">Category</label>
+                                <select id="project-category" required>
+                                    <option value="App">App</option>
+                                    <option value="Website">Website</option>
+                                    <option value="Cloud">Cloud</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="project-description">Description</label>
+                                <textarea id="project-description" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="project-features">Features</label>
+                                <div class="tags-input-container">
+                                    <input type="text" id="project-features" placeholder="Type and press Enter">
+                                    <div id="project-features-tags" class="tags-container"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="has-feature-text">Do you want to add extra text under features?</label>
+                                <select id="has-feature-text" required>
+                                    <option value="no">No</option>
+                                    <option value="yes">Yes</option>
+                                </select>
+                            </div>
+                            <div class="form-group feature-text-group" style="display: none;">
+                                <label for="feature-text">Extra Text</label>
+                                <textarea id="feature-text" name="feature-text" placeholder="Enter additional text to display under features"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="project-technologies">Technologies</label>
+                                <div class="tags-input-container">
+                                    <input type="text" id="project-technologies" placeholder="Type and press Enter">
+                                    <div id="project-technologies-tags" class="tags-container"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="project-link">Project Link</label>
+                                <input type="url" id="project-link" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="project-link-type">Link Type</label>
+                                <select id="project-link-type" required>
+                                    <option value="Github">Github</option>
+                                    <option value="Website">Website</option>
+                                    <option value="Not applicable">Not applicable</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="project-status">Status</label>
+                                <select id="project-status" required>
+                                    <option value="Completed">Completed</option>
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="Planned">Planned</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="project-image">Project Image</label>
+                                <div class="file-input-container">
+                                    <input type="file" id="project-image" accept="image/*" required>
+                                    <div class="file-input-button">
+                                        <span class="file-input-icon">📁</span>
+                                        <span class="file-input-text">Choose Image</span>
+                                    </div>
+                                    <span class="file-name" id="project-image-name">No file chosen</span>
+                                </div>
+                                <div class="image-preview" id="project-image-preview"></div>
+                            </div>
+                            <button type="submit" class="btn">Add Project</button>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Blogs Section (Hidden until authenticated) -->
+                <section id="blogs" class="kavin_section" style="display: none;">
+                    <div class="container">
+                        <h2>Add New Blog</h2>
+                        <form id="blog-form" class="form">
+                            <div class="form-group">
+                                <label for="blog-title">Blog Title</label>
+                                <input type="text" id="blog-title" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="blog-author">Author</label>
+                                <input type="text" id="blog-author" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="blog-category">Category</label>
+                                <input type="text" id="blog-category" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="blog-image">Blog Image</label>
+                                <div class="file-input-container">
+                                    <input type="file" id="blog-image" accept="image/*" required>
+                                    <div class="file-input-button">
+                                        <span class="file-input-icon">📁</span>
+                                        <span class="file-input-text">Choose Image</span>
+                                    </div>
+                                    <span class="file-name" id="blog-image-name">No file chosen</span>
+                                </div>
+                                <div class="image-preview" id="blog-image-preview"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="blog-link">Blog Link</label>
+                                <input type="url" id="blog-link" required>
+                            </div>
+                            <button type="submit" class="btn">Add Blog</button>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Scripts -->
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/script.js"></script>
+</body>
+</html> 
