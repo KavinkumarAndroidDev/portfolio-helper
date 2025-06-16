@@ -261,6 +261,10 @@ if (projectForm) {
             document.getElementById('project-technologies-tags').innerHTML = '';
             featureTextGroup.style.display = 'none';
             document.getElementById('project-image-preview').style.display = 'none';
+            
+            // Clear the tags arrays
+            featuresTags.length = 0;
+            technologiesTags.length = 0;
         } catch (error) {
             console.error('Error adding project:', error);
             showNotification(error.message || 'Error adding project', 'error');
