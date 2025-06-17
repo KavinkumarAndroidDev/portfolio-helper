@@ -260,6 +260,7 @@ function createBlogCard(id, blog) {
             <h4 class="item-title">${blog.title}</h4>
             <span class="item-category">${blog.category}</span>
             <p>By ${blog.author}</p>
+            <p class="blog-date">${new Date(blog.date).toLocaleDateString()}</p>
             <div class="item-actions">
                 <button class="btn-edit" data-id="${id}">Edit</button>
                 <button class="btn-delete" data-id="${id}">Delete</button>
@@ -369,6 +370,10 @@ function generateEditForm(type, data) {
                 <input type="text" id="edit-category" value="${data.category}" required>
             </div>
             <div class="form-group">
+                <label for="edit-date">Date</label>
+                <input type="date" id="edit-date" value="${data.date}" required>
+            </div>
+            <div class="form-group">
                 <label for="edit-link">Link</label>
                 <input type="url" id="edit-link" value="${data.link}" required>
             </div>
@@ -393,6 +398,7 @@ async function handleEditSubmit(e, type, id) {
             data.status = document.getElementById('edit-status').value;
         } else {
             data.author = document.getElementById('edit-author').value;
+            data.date = document.getElementById('edit-date').value;
         }
 
         const docRef = doc(db, type + 's', id);

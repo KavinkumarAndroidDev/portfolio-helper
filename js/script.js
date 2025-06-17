@@ -290,6 +290,7 @@ blogForm.addEventListener('submit', async (e) => {
             title: document.getElementById('blog-title').value,
             author: document.getElementById('blog-author').value,
             category: document.getElementById('blog-category').value,
+            date: document.getElementById('blog-date').value,
             image: imageUrl,
             link: document.getElementById('blog-link').value
         };
